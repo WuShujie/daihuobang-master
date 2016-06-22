@@ -23,4 +23,6 @@
         app:headerLayout="@layout/nav_header_side_slip_"
         app:menu="@menu/activity_side_slip__drawer" />
 
+    <!--<>-->
+
 </android.support.v4.widget.DrawerLayout>

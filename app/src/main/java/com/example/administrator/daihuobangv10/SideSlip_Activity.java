@@ -98,7 +98,5 @@ public class SideSlip_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
     //modify！
 }
