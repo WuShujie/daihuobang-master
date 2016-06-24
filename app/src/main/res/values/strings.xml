@@ -1,8 +1,17 @@
 <resources>
-    <string name="app_name">DaiHuoBangv1.0</string>
+    <string name="app_name">带货帮1.0</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="username">用户名</string>
+    <string name="pwd">密码</string>
+    <string name="repwd">确认密码</string>
     <string name="action_settings">Settings</string>
+    <string name="login">登录</string>
+    <string name="regist">注册</string>
+    <string name="findpwd">> 找回密码</string>
+    <string name="toregist">> 去注册</string>
+    <string name="phone">手机号码</string>
+    <string name="idcard">身份证号</string>
 </resources>
