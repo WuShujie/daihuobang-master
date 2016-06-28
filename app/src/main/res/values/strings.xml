@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">带货帮1.0</string>
+    <string name="app_name">带货帮</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -14,4 +14,7 @@
     <string name="toregist">> 去注册</string>
     <string name="phone">手机号码</string>
     <string name="idcard">身份证号</string>
+    <string name="kinds">货物种类</string>
+    <string name="pay">支付方式</string>
+    <string name="time">送达时间</string>
 </resources>

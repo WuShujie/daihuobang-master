@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="kinds">
+        <item>食物</item>
+        <item>衣物</item>
+        <item>电子产品</item>
+        <item>办公耗材</item>
+        <item>图书</item>
+    </string-array>
+    
+    <string-array name="pay">
+        <item>支付宝支付</item>
+        <item>货到付款</item>
+    </string-array>
+
+    <string-array name="time">
+        <item>2小时</item>
+        <item>6小时</item>
+        <item>12小时</item>
+        <item>1天</item>
+        <item>3天</item>
+        <item>1周</item>
+    </string-array>
+</resources>
