@@ -15,23 +15,54 @@ import android.widget.Spinner;
  *
  */
 public class OrderDetails_Activity extends Activity {
+
     @Override
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_details);
 
+        //获取页面上的各种控件
         Button btn = (Button) findViewById(R.id.btn_order);
         Spinner sp1 = (Spinner) findViewById(R.id.spinner1);
         Spinner sp2 = (Spinner) findViewById(R.id.spinner2);
         Spinner sp3 = (Spinner) findViewById(R.id.spinner3);
-
         final CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.layout1);
 
+        //从array数组中读取到各个下拉列表项内容
         String[] kinds = getResources().getStringArray(R.array.kinds);
         String[] pays = getResources().getStringArray(R.array.pay);
         String[] time = getResources().getStringArray(R.array.time);
+
+        //设置标题栏样式：title，返回按钮，以及返回的监听响应
+        android.support.v7.widget.Toolbar tb = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar1);
+        tb.setTitle("带货帮");
+        tb.setNavigationIcon(R.drawable.ic_return);
+        tb.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(layout,"return",Snackbar.LENGTH_LONG).setAction("ok", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                }).show();
+            }
+        });
+
+
+        //确认订单按钮的点击监听响应
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(layout,"已确认订单",Snackbar.LENGTH_LONG).setAction("yes", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                }).show();
+            }
+        });
+
+
+        //为每个下拉列表spinner设置adapter以及列表项的选择监听
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,kinds);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -45,11 +76,9 @@ public class OrderDetails_Activity extends Activity {
                         ],Snackbar.LENGTH_SHORT).setAction("right",new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-
                     }
                 }).show();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -66,11 +95,9 @@ public class OrderDetails_Activity extends Activity {
                         ],Snackbar.LENGTH_SHORT).setAction("right",new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-
                     }
                 }).show();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -88,15 +115,11 @@ public class OrderDetails_Activity extends Activity {
                         ],Snackbar.LENGTH_SHORT).setAction("right",new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-
                     }
                 }).show();
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
     }
 }

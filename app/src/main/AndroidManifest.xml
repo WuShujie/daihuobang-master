@@ -20,16 +20,22 @@
 
         <activity android:name=".Regist_Activity"></activity>
 
-        <activity android:name=".OrderDetails_Activity"></activity>
+        <activity android:name=".OrderDetails_Activity">
+
+        </activity>
 
         <activity android:name=".OrderNearby_Activity">
+
+        </activity>
+
+        <activity android:name=".OrderNearby_Content"></activity>
+
+        <activity android:name=".PersonalInfo_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".OrderNearby_Content"></activity>
     </application>
 
 </manifest>
