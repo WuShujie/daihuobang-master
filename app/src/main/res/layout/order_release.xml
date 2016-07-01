@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
+    android:id="@+id/layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroud"
@@ -15,16 +15,16 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:fitsSystemWindows="true">
 
             <android.support.v7.widget.Toolbar
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/toolbar1"
+                android:id="@+id/toolbar_order_release"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:popupTheme="@style/AppTheme.PopupOverlay">
-
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 
@@ -41,9 +41,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/colorPrimary"
-                android:text="订单详情"
+                android:text="发布运力"
                 android:textSize="25sp"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_margin="25dp"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -69,8 +70,6 @@
                     android:textSize="15sp"/>
             </android.support.design.widget.TextInputLayout>
 
-
-
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,19 +78,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="数量"
-                    android:textSize="15sp"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30sp"
-                android:layout_marginRight="30sp">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="收货人"
+                    android:hint="出发时间"
                     android:textSize="15sp"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -101,11 +88,11 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="18dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 货物类型:"
+                    android:text=" 车辆剩余容积:"
                     android:layout_gravity="center_vertical"
                     android:textSize="15sp"/>
                 <Spinner
@@ -124,35 +111,11 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="18dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 送达时间:"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="15sp"/>
-                <Spinner
-                    android:id="@+id/spinner3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:layout_weight="1"
-                    android:spinnerMode="dialog"
-                    android:prompt="@string/time"/>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" 付款方式:"
+                    android:text=" 可接受额外里程:"
                     android:layout_gravity="center_vertical"
                     android:textSize="15sp"/>
                 <Spinner
@@ -162,20 +125,43 @@
                     android:gravity="right"
                     android:layout_weight="1"
                     android:spinnerMode="dialog"
+                    android:prompt="@string/time"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="18dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 可接受额外时间:"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15sp"/>
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:spinnerMode="dropdown"
                     android:prompt="@string/pay"/>
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_order"
+                android:id="@+id/btn_order_release"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
                 android:background="@color/colorPrimary"
                 android:textSize="22sp"
                 android:textColor="@color/white"
-                android:text="确定订单"
+                android:text="确定发布"
                 android:elevation="6dp"/>
         </LinearLayout>
     </LinearLayout>

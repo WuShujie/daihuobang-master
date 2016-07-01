@@ -1,6 +1,7 @@
 package com.example.administrator.daihuobangv10;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -36,6 +37,7 @@ public class OrderDetails_Activity extends Activity {
         //设置标题栏样式：title，返回按钮，以及返回的监听响应
         android.support.v7.widget.Toolbar tb = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar1);
         tb.setTitle("带货帮");
+        tb.setTitleTextColor(Color.parseColor("#ffffff"));
         tb.setNavigationIcon(R.drawable.ic_return);
         tb.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

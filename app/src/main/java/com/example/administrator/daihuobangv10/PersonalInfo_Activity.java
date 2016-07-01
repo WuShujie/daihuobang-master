@@ -1,32 +1,24 @@
 package com.example.administrator.daihuobangv10;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.Button;
 
 /**
  * Created by wsj on 16/6/29.
  */
-public class PersonalInfo_Activity extends Activity{
-
-    private ImageButton imgbtn;
-    private Bitmap head;
-    private static String path = "/sdcard/";
+public class PersonalInfo_Activity extends AppCompatActivity{
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -37,11 +29,20 @@ public class PersonalInfo_Activity extends Activity{
         //获取页面相关控件
         final CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.layout);
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
+        Button btn_editinfo = (Button) findViewById(R.id.btn_editinfo);
 
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
+
+        collapsingToolbarLayout.setTitle("个人信息");
+
+        setSupportActionBar(tb);
         //设置标题栏内容：title，返回按钮，右上菜单
         tb.setTitle("个人信息");
         tb.setTitleTextColor(Color.parseColor("#ffffff"));
         tb.setNavigationIcon(R.drawable.ic_return);
+        tb.inflateMenu(R.menu.personal_info);
+
+        //设置标题栏左边返回按钮的响应事件
         tb.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,44 +53,38 @@ public class PersonalInfo_Activity extends Activity{
                 }).show();
             }
         });
-        tb.inflateMenu(R.menu.personal_info);
-        tb.setOnMenuItemClickListener(MenuItemClickListener);
 
-        imgbtn = (ImageButton) findViewById(R.id.imgbtn);
-
-        imgbtn.setOnClickListener(new View.OnClickListener() {
+        //设置标题栏上菜单的监听响应——跳转到下一页面对个人信息进行修改
+        tb.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK,null);
-                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
-                startActivity(intent);
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent();
+                intent.setClass(PersonalInfo_Activity.this,EditInfo_Activity.class);
+                startActivityForResult(intent,1);
+                return true;
             }
         });
 
-
-        Bitmap bt = BitmapFactory.decodeFile(path+"head.png");
-        Drawable drawable = new BitmapDrawable(bt);
-        imgbtn.setBackground(drawable);
-    }
-
-    //菜单点击监听响应
-    private Toolbar.OnMenuItemClickListener MenuItemClickListener = new Toolbar.OnMenuItemClickListener() {
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            String msg = "";
-            switch (item.getItemId()){
-                case R.id.action:
-                    msg += "click edit";
-                    break;
+        //设置页面内信息修改按钮的监听响应——跳转到对个人信息的修改
+        btn_editinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(PersonalInfo_Activity.this,EditInfo_Activity.class);
+                startActivityForResult(intent,1);
             }
-            if(!msg.equals(""))
-                Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
-            return true;
-        }
-    };
+        });
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.personal_info,menu);
+        return true;
     }
 }
