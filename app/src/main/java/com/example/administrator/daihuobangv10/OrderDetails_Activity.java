@@ -22,23 +22,27 @@ public class OrderDetails_Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_details);
 
-        //获取页面上的各种控件
-        Button btn = (Button) findViewById(R.id.btn_order);
-        Spinner sp1 = (Spinner) findViewById(R.id.spinner1);
-        Spinner sp2 = (Spinner) findViewById(R.id.spinner2);
-        Spinner sp3 = (Spinner) findViewById(R.id.spinner3);
-        final CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.layout1);
 
-        //从array数组中读取到各个下拉列表项内容
+        //获取页面上的各种控件
+        Button btn = (Button) findViewById(R.id.btn_order);     //确认订单按钮
+        Spinner sp1 = (Spinner) findViewById(R.id.spinner1);    //货物类型下拉列表
+        Spinner sp2 = (Spinner) findViewById(R.id.spinner2);    //支付方式下拉列表
+        Spinner sp3 = (Spinner) findViewById(R.id.spinner3);    //送达时间下拉列表
+        final CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.layout_coor);
+
+
+        //从array数组中读取到各个下拉列表项具体内容
         String[] kinds = getResources().getStringArray(R.array.kinds);
         String[] pays = getResources().getStringArray(R.array.pay);
         String[] time = getResources().getStringArray(R.array.time);
+        android.support.v7.widget.Toolbar tb = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_order_details);
 
-        //设置标题栏样式：title，返回按钮，以及返回的监听响应
-        android.support.v7.widget.Toolbar tb = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar1);
+
+        //设置标题栏样式：title，返回按钮。并且设置返回按钮的监听及点击响应事件
         tb.setTitle("带货帮");
         tb.setTitleTextColor(Color.parseColor("#ffffff"));
-        tb.setNavigationIcon(R.drawable.ic_return);
+        tb.setNavigationIcon(R.drawable.ic_return);//设置左上按钮
+        //添加左上按钮的点击监听事件
         tb.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +68,7 @@ public class OrderDetails_Activity extends Activity {
         });
 
 
-        //为每个下拉列表spinner设置adapter以及列表项的选择监听
+        //为每个下拉列表spinner设置adapter，以及对列表项的选择进行监听且响应
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,kinds);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

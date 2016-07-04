@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout1"
+    android:id="@+id/layout_coor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroud"
@@ -19,7 +19,7 @@
 
             <android.support.v7.widget.Toolbar
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/toolbar1"
+                android:id="@+id/toolbar_order_details"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
@@ -51,6 +51,7 @@
                 android:layout_marginLeft="30sp"
                 android:layout_marginRight="30sp">
                 <EditText
+                    android:id="@+id/et_start_OrderDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="出发点"
@@ -63,13 +64,12 @@
                 android:layout_marginLeft="30sp"
                 android:layout_marginRight="30sp">
                 <EditText
+                    android:id="@+id/et_end_OrderDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="目的地"
                     android:textSize="15sp"/>
             </android.support.design.widget.TextInputLayout>
-
-
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -77,6 +77,7 @@
                 android:layout_marginLeft="30sp"
                 android:layout_marginRight="30sp">
                 <EditText
+                    android:id="@+id/et_number_OrderDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="数量"
@@ -89,9 +90,23 @@
                 android:layout_marginLeft="30sp"
                 android:layout_marginRight="30sp">
                 <EditText
+                    android:id="@+id/et_receiver_OrderDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="收货人"
+                    android:textSize="15sp"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:layout_marginRight="30sp">
+                <EditText
+                    android:id="@+id/et_receiverphone_OrderDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="收货人号码"
                     android:textSize="15sp"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -128,30 +143,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 送达时间:"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="15sp"/>
-                <Spinner
-                    android:id="@+id/spinner3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:layout_weight="1"
-                    android:spinnerMode="dialog"
-                    android:prompt="@string/time"/>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text=" 付款方式:"
                     android:layout_gravity="center_vertical"
                     android:textSize="15sp"/>
@@ -165,13 +156,36 @@
                     android:prompt="@string/pay"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 送达时间:"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15sp"/>
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:spinnerMode="dialog"
+                    android:prompt="@string/time"/>
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btn_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/colorPrimary"
                 android:textSize="22sp"
                 android:textColor="@color/white"

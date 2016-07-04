@@ -39,6 +39,7 @@ public class OrderNearby_Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_nearby);
 
+
 //      重写viewPager的适配器
         class MyPageAdapter extends PagerAdapter {
             private List<View> viewList;
@@ -80,15 +81,21 @@ public class OrderNearby_Activity extends Activity {
             }
         }
 
+
         //获取页面的布局layout
         final CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.layout_coor);
         inflater = getLayoutInflater();
         //通过ID获得页面控件
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        tb = (Toolbar) findViewById(R.id.toolbar);
+
+        //inflater找到页卡的页面view
+        view1 = inflater.inflate(R.layout.content_order_nearby,null);
+        view2 = inflater.inflate(R.layout.content_order_nearby,null);
+
 
         //标题栏返回按钮的点击监听响应
-        tb = (Toolbar) findViewById(R.id.toolbar);
         tb.setNavigationIcon(R.drawable.ic_return);
         tb.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,16 +103,11 @@ public class OrderNearby_Activity extends Activity {
                 Snackbar.make(layout,"return",Snackbar.LENGTH_LONG).setAction("ok", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                     }
                 }).show();
             }
         });
 
-
-        //inflater找到页卡的页面view
-        view1 = inflater.inflate(R.layout.content_order_nearby,null);
-        view2 = inflater.inflate(R.layout.content_order_nearby,null);
 
         //获取view中的list view
         ListView lv1 = (ListView) view1.findViewById(R.id.lv);
@@ -122,11 +124,14 @@ public class OrderNearby_Activity extends Activity {
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Snackbar.make(layout,"you click to item"+position,Snackbar.LENGTH_SHORT).setAction("OK",
+                Snackbar.make(layout,"you will view item"+position,Snackbar.LENGTH_SHORT).setAction("OK",
                         new View.OnClickListener() {
                             @Override
-                            public void onClick(View v) { }
+                            public void onClick(View v) {
+
+                            }
                         }).show();
+
             }
         });
 
@@ -140,6 +145,7 @@ public class OrderNearby_Activity extends Activity {
 
         //设置TAB的模式
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
+
         //给tab添加tab栏
         tabLayout.addTab(tabLayout.newTab().setText(titlelist.get(0)));
         tabLayout.addTab(tabLayout.newTab().setText(titlelist.get(1)));
@@ -152,10 +158,9 @@ public class OrderNearby_Activity extends Activity {
         //将tab跟viewpage连接
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabsFromPagerAdapter(adapter);
-
     }
 
-    //获取listview里面item项的内容
+//    获取listview里面item项的内容
     private List<Map<String,Object>> getData() {
         List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
         for (int i=0;i<3;i++) {

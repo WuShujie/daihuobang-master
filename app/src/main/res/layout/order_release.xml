@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
-    android:id="@+id/layout"
+    android:id="@+id/layout_order_release"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,12 +12,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!--标题栏-->
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             android:fitsSystemWindows="true">
-
             <android.support.v7.widget.Toolbar
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/toolbar_order_release"
@@ -28,6 +28,7 @@
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 
+        <!--发布运力详情页面-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -52,6 +53,7 @@
                 android:layout_marginLeft="30sp"
                 android:layout_marginRight="30sp">
                 <EditText
+                    android:id="@+id/et_start_OrderRelease"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="出发点"
@@ -64,6 +66,7 @@
                 android:layout_marginLeft="30sp"
                 android:layout_marginRight="30sp">
                 <EditText
+                    android:id="@+id/et_end_OrderRelease"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="目的地"
@@ -76,6 +79,7 @@
                 android:layout_marginLeft="30sp"
                 android:layout_marginRight="30sp">
                 <EditText
+                    android:id="@+id/et_starttime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="出发时间"
