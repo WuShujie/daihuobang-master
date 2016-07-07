@@ -175,7 +175,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_editinfo"
+                android:id="@+id/btn_modifyinfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -185,7 +185,8 @@
                 android:textSize="20sp"
                 android:background="@color/colorPrimary"
                 android:elevation="6dp"
-                android:layout_marginTop="40dp"/>
+                android:layout_marginTop="40dp"
+                style="?android:attr/borderlessButtonStyle"/>
         </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

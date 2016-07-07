@@ -1,6 +1,7 @@
 package com.example.administrator.daihuobangv10;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -124,14 +125,7 @@ public class OrderNearby_Activity extends Activity {
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Snackbar.make(layout,"you will view item"+position,Snackbar.LENGTH_SHORT).setAction("OK",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                            }
-                        }).show();
-
+                ClickItem();
             }
         });
 
@@ -162,9 +156,9 @@ public class OrderNearby_Activity extends Activity {
 
 //    获取listview里面item项的内容
     private List<Map<String,Object>> getData() {
-        List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+        List<Map<String,Object>> list = new ArrayList<>();
         for (int i=0;i<3;i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
+            Map<String, Object> map = new HashMap<>();
             map.put("img", R.drawable.ic_menu_camera);
             map.put("tv1", "类型：图书");
             map.put("tv2", "重量：10KG");
@@ -173,5 +167,11 @@ public class OrderNearby_Activity extends Activity {
             list.add(map);
         }
         return list;
+    }
+
+    //点击列表项响应事件
+    private void ClickItem() {
+        Intent intent = new Intent(this,ViewOrder_Activity.class);
+        startActivityForResult(intent,1);
     }
 }

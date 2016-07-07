@@ -1,9 +1,7 @@
 package com.example.administrator.daihuobangv10;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -20,7 +18,6 @@ import android.widget.Button;
  */
 public class PersonalInfo_Activity extends AppCompatActivity{
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +26,7 @@ public class PersonalInfo_Activity extends AppCompatActivity{
         //获取页面相关控件
         final CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.layout);
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
-        Button btn_editinfo = (Button) findViewById(R.id.btn_editinfo);
+        Button btn_modifyinfo = (Button) findViewById(R.id.btn_modifyinfo);
 
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
 
@@ -66,7 +63,7 @@ public class PersonalInfo_Activity extends AppCompatActivity{
         });
 
         //设置页面内信息修改按钮的监听响应——跳转到对个人信息的修改
-        btn_editinfo.setOnClickListener(new View.OnClickListener() {
+        btn_modifyinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();

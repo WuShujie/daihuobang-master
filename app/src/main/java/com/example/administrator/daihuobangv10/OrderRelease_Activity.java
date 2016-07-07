@@ -1,5 +1,6 @@
 package com.example.administrator.daihuobangv10;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -10,7 +11,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * Created by wsj on 16/7/1.
@@ -29,16 +33,25 @@ public class OrderRelease_Activity extends AppCompatActivity {
         Spinner sp2 = (Spinner) findViewById(R.id.spinner2);
         Spinner sp3 = (Spinner) findViewById(R.id.spinner3);
         Button btn = (Button) findViewById(R.id.btn_order_release);
+        Button btn2 = (Button) findViewById(R.id.btn_choosetime);
+        final EditText et = (EditText) findViewById(R.id.et_starttime);
 
 
 //        为标题栏设置添加title及左上的返回按钮
         setSupportActionBar(tb);
         tb.setTitle("带货帮");
         tb.setNavigationIcon(R.drawable.ic_return);
+        tb.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(layout,"return",Snackbar.LENGTH_LONG).show();
+                finish();
+            }
+        });
 
 
 //        从array中获取下拉列表内容
-        String[] release = getResources().getStringArray(R.array.release);
+        final String[] release = getResources().getStringArray(R.array.release);
         String[] distance = getResources().getStringArray(R.array.distance);
         String[] time_extra = getResources().getStringArray(R.array.time_extra);
 
@@ -109,8 +122,28 @@ public class OrderRelease_Activity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(),"fabuyunli",Toast.LENGTH_SHORT).show();
+                release();
             }
         });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog date = new DatePickerDialog(OrderRelease_Activity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        String str = year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+                        et.setText(str);
+                    }
+                },2016,7,6);
+                date.show();
+            }
+        });
+   }
+
+    private void release(){
+        //发布运力
     }
+
 }

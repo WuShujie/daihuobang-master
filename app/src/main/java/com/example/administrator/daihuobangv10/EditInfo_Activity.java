@@ -26,6 +26,7 @@ public class EditInfo_Activity extends AppCompatActivity {
         //设置标题栏的返回按钮图标
         tb.setNavigationIcon(R.drawable.ic_return);
 
+
         //设置标题栏按钮的点击响应事件——结束该页面并返回上一页面
         tb.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +42,6 @@ public class EditInfo_Activity extends AppCompatActivity {
                 Snackbar.make(layout,"Edit Confirm!",Snackbar.LENGTH_LONG).setAction("ok", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                     }
                 }).show();
             }
