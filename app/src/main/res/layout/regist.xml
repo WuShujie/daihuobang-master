@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
+    android:id="@+id/layout_regist"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -47,6 +48,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/textinput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30sp"
@@ -64,7 +66,7 @@
             android:layout_marginLeft="30sp"
             android:layout_marginRight="30sp">
             <EditText
-                android:id="@+id/phone"
+                android:id="@+id/et_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/phone"/>
@@ -76,7 +78,7 @@
             android:layout_marginLeft="30sp"
             android:layout_marginRight="30sp">
             <EditText
-                android:id="@+id/idcard"
+                android:id="@+id/et_idcard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/idcard"/>

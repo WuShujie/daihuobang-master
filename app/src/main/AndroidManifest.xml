@@ -20,6 +20,10 @@
         </activity>
 
         <activity android:name=".Regist_Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".OrderDetails_Activity">
@@ -48,10 +52,7 @@
         </activity>
 
         <activity android:name=".Confirm_Order_Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
     </application>

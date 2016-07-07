@@ -76,6 +76,14 @@ public class Login_Activity extends Activity {
 
                 editor.commit();
 
+
+
+
+
+
+
+
+
                 Intent intent = new Intent();
                 intent.setClass(Login_Activity.this,SideSlip_Activity.class);
                 Login_Activity.this.startActivity(intent);

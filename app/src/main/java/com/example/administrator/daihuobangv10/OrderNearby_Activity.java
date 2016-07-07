@@ -134,8 +134,8 @@ public class OrderNearby_Activity extends Activity {
         viewList.add(view2);
 
         //添加页面的标题
-        titlelist.add("综合排序");
-        titlelist.add("筛选");
+        titlelist.add("正进行");
+        titlelist.add("已完成");
 
         //设置TAB的模式
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
