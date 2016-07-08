@@ -1,6 +1,5 @@
 package com.example.administrator.daihuobangv10.util;
 
-import android.os.Handler;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -23,7 +22,6 @@ public class HttpConnect {
     private Integer socketTimeout = null;
     private static String  proxyHost = null;
     private static Integer proxyPort = null;
-    private Handler handler;
 
 
     /**
@@ -54,7 +52,8 @@ public class HttpConnect {
         String tempLine = null;
 
         if (httpURLConnection.getResponseCode() >= 300) {
-            throw new Exception("HTTP Request is not success, Response code is " + httpURLConnection.getResponseCode());
+            throw new Exception("HTTP Request is not success, Response code is "
+                    + httpURLConnection.getResponseCode());
         }
 
         try {
@@ -82,10 +81,6 @@ public class HttpConnect {
         }
 
         Log.i("tag",resultBuffer.toString());
-
-//        Message msg = Message.obtain();
-//        msg.obj = resultBuffer.toString();
-//        handler.sendMessage(msg);
 
         return resultBuffer.toString();
 
