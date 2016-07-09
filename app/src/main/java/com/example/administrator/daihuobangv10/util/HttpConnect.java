@@ -38,8 +38,6 @@ public class HttpConnect {
         //通过openconnection连接
         URLConnection connection = openConnection(localURL);
 
-        Log.i("111","111");
-
         HttpURLConnection httpURLConnection = (HttpURLConnection)connection;
 
         httpURLConnection.setRequestProperty("Accept-Charset",charset);
@@ -55,6 +53,8 @@ public class HttpConnect {
             throw new Exception("HTTP Request is not success, Response code is "
                     + httpURLConnection.getResponseCode());
         }
+
+        Log.i("url","connected!!!!!");
 
         try {
             inputStream = httpURLConnection.getInputStream();
@@ -80,7 +80,7 @@ public class HttpConnect {
             }
         }
 
-        Log.i("tag",resultBuffer.toString());
+        Log.i("url",resultBuffer.toString());
 
         return resultBuffer.toString();
 

@@ -17,10 +17,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.daihuobangv10.Dao.User;
 import com.example.administrator.daihuobangv10.util.HttpConnect;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -45,10 +47,12 @@ public class PersonalInfo_Activity extends AppCompatActivity{
                     Log.i("tag",s);
 
                     if (s.equals("-1")){
-                        setDialog("用户ID不匹配");
+//                        setDialog("用户ID不匹配");
+                        Toast.makeText(getApplicationContext(),"用户ID不存在",Toast.LENGTH_SHORT).show();
                     }else {
                         try{
-                            JSONObject json = new JSONObject(s);//将子线程发送的string转化为JSON
+                            JSONArray ja = new JSONArray(s);
+                            JSONObject json = ja.getJSONObject(0);//将子线程发送的string转化为JSON
                             //把JSON中内容提出存入user类中
                             User.id = json.getString("id");
                             User.username = json.getString("name");
@@ -57,10 +61,10 @@ public class PersonalInfo_Activity extends AppCompatActivity{
                             User.idcardNum = json.getString("idnumber");
 
                             //写入textview文本
-                            tv1.setText(User.id);
-                            tv2.setText(User.username);
-                            tv3.setText(User.phoneNum);
-                            tv4.setText(User.idcardNum);
+                            tv1.setText("用户ID:"+User.id);
+                            tv2.setText("用户名:"+User.username);
+                            tv3.setText("手机号码:"+User.phoneNum);
+                            tv4.setText("身份证号码:"+User.idcardNum);
                         }catch (Exception e)
                         {
                             e.printStackTrace();
@@ -139,6 +143,7 @@ public class PersonalInfo_Activity extends AppCompatActivity{
 //        User.username = "diro";
 //        User.phoneNum = "123456";
 //        User.idcardNum = "12345";
+        User.id = "16";
 
 //        拼接url
         final String url = "http://120.27.48.82:3000/user/getUserInfo?"+"userId="+User.id;

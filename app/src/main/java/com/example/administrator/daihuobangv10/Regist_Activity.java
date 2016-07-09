@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.administrator.daihuobangv10.Dao.User;
 import com.example.administrator.daihuobangv10.util.HttpConnect;
@@ -59,11 +60,15 @@ public class Regist_Activity extends Activity implements View.OnClickListener{
             switch (msg.what) {
                 case 1:
                     String s = (String)msg.obj;
+                    Log.i("handler",s);
+
                     if (s.equals(0)) {
-                        setDialog("该手机号码已经被使用，请使用其他号码注册"); //弹出对话框提示
+//                        setDialog("该手机号码已经被使用，请使用其他号码注册"); //弹出对话框提示
+                        Toast.makeText(getApplicationContext(),"手机号码已经被使用，请使用其他号码注册",Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        setDialog("您已成功注册"); //弹出对话框
+//                        setDialog("您已成功注册"); //弹出对话框
+                        Toast.makeText(getApplicationContext(),"成功注册",Toast.LENGTH_SHORT).show();
 
                         User.id = s;    //将后台返回的用户ID存到user类中
 
@@ -82,10 +87,20 @@ public class Regist_Activity extends Activity implements View.OnClickListener{
      * @param msg
      */
     private void setDialog(String msg) {
-        new AlertDialog.Builder(getApplicationContext())
-                .setTitle("提示").setMessage(msg)
-                .setPositiveButton("确定",null)
-                .show();
+        final String str = msg;
+        new Thread(){
+            @Override
+            public void run() {
+                new AlertDialog.Builder(getApplicationContext())
+                        .setTitle("提示").setMessage(str)
+                        .setPositiveButton("确定",null)
+                        .show();
+                Message msg = Message.obtain();
+                msg.what = 2;
+                handler.sendMessage(msg);
+            }
+        }.start();
+
     }
 
     /**
@@ -102,7 +117,7 @@ public class Regist_Activity extends Activity implements View.OnClickListener{
         final String idnum = et_idnum.getText().toString().trim();
 
 //        拼接URL
-        final String url = "http://localhost:3000/user/addUser?"+"userName="+username+"&userPassword="+pwd+
+        final String url = "http://120.27.48.82:3000/user/addUser?"+"userName="+username+"&userPassword="+pwd+
                 "&phoneNumber="+phone+"&idNumber="+idnum;
 
         Log.i("url",url);

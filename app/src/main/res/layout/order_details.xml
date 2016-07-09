@@ -36,6 +36,14 @@
             android:layout_margin="10dp"
             android:elevation="6dp">
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,9 +88,22 @@
                     android:id="@+id/et_number_OrderDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="数量"
+                    android:hint="货物数量"
                     android:textSize="15sp"/>
             </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp">
+                    <EditText
+                        android:id="@+id/et_volume_OrderDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="货物体积"
+                        android:textSize="15sp"/>
+                </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -169,6 +190,15 @@
                     android:text=" 送达时间:"
                     android:layout_gravity="center_vertical"
                     android:textSize="15sp"/>
+                <Button
+                    android:id="@+id/btn_chooseday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择日期"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:background="@color/white"
+                    style="?android:attr/borderlessButtonStyle"/>
                 <Spinner
                     android:id="@+id/spinner3"
                     android:layout_width="match_parent"
@@ -176,7 +206,7 @@
                     android:gravity="right"
                     android:layout_weight="1"
                     android:spinnerMode="dialog"
-                    android:prompt="@string/time"/>
+                    android:prompt="@string/time" />
             </LinearLayout>
 
             <Button
@@ -186,12 +216,17 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@color/colorPrimary"
                 android:textSize="22sp"
                 android:textColor="@color/white"
                 android:text="确定订单"
                 android:elevation="6dp"/>
         </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

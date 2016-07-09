@@ -12,10 +12,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.administrator.daihuobangv10.Dao.User;
 import com.example.administrator.daihuobangv10.util.HttpConnect;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -41,16 +43,20 @@ public class Login_Activity extends Activity implements View.OnClickListener{
                     String s = msg.obj.toString();
                     Log.i("tag",s);
 
-                    if (s.equals(-1)) {
-                        setDialog("输入的手机号与密码不匹配");  //弹出对话框提示
+                    if (s.equals("-1")) {
+                        Toast.makeText(getApplicationContext(),"输入的手机号与密码不匹配",Toast.LENGTH_SHORT).show();
+//                        setDialog("输入的手机号与密码不匹配");  //弹出对话框提示
                     }else {
                         try{
                             //将string转化为JSON并逐一获取object中的内容，写入到user类中
-                            JSONObject json = new JSONObject(s);
+                            JSONArray ja = new JSONArray(s);
+                            JSONObject json = ja.getJSONObject(0);
+
                             User.id = json.getString("id");
                             User.username = json.getString("name");
                             User.password = json.getString("phonenumber");
                             User.idcardNum = json.getString("idnumber");
+                            Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_SHORT).show();
 
                         }catch (Exception e) {
                             e.printStackTrace();
@@ -128,7 +134,7 @@ public class Login_Activity extends Activity implements View.OnClickListener{
                 editor.commit();
 
                 //拼接URL
-                final String url = "http://localhost:3000/user/logIn?"+"phoneNumber="+phone+"&userPassword="+pwd;
+                final String url = "http://120.27.48.82:3000/user/logIn?"+"phoneNumber="+phone+"&userPassword="+pwd;
 
                 Log.i("tag",url);
 
@@ -149,6 +155,7 @@ public class Login_Activity extends Activity implements View.OnClickListener{
                         }
                     }
                 }.start();
+                break;
 
             case R.id.btn_toregist: //注册按钮的响应
                 //跳转到主界面
