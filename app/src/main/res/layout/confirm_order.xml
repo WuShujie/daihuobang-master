@@ -5,6 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroud">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+                <android.support.design.widget.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+                        <android.support.v7.widget.Toolbar
+                            android:id="@+id/toolbar_confirm_order"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize">
+                        </android.support.v7.widget.Toolbar>
+                </android.support.design.widget.AppBarLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -25,7 +42,7 @@
                         <ListView
                             android:id="@+id/lv_confirm_order"
                             android:layout_width="match_parent"
-                            android:layout_height="450dp"
+                            android:layout_height="400dp"
                             android:divider="@color/backgroud"
                             android:dividerHeight="3dp"
                             android:background="@color/white"/>
@@ -40,6 +57,6 @@
                             android:layout_marginTop="15dp"/>
                 </LinearLayout>
         </ScrollView>
-
+        </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

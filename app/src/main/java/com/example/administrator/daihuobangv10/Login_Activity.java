@@ -45,7 +45,7 @@ public class Login_Activity extends Activity implements View.OnClickListener{
                     Log.i("tag",s);
 
                     if (s.equals("-1")) {
-                        Toast.makeText(getApplicationContext(),"输入的手机号与密码不匹配",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"输入的手机号与密码不匹配",Toast.LENGTH_LONG).show();
 //                        setDialog("输入的手机号与密码不匹配");  //弹出对话框提示
                     }else {
                         try{

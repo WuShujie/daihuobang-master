@@ -44,14 +44,6 @@ public class Regist_Activity extends Activity implements View.OnClickListener{
 //给注册按钮设置监听器
         regist.setOnClickListener(this);
 
-//                TextInputLayout input = (TextInputLayout)findViewById(R.id.textinput);
-//                if (repwd.equalsIgnoreCase(pwd)){
-//                    input.setError("right!");
-//                }
-//                else
-//                    input.setErrorEnabled(false);
-//                    input.setError("not the same password!");
-
     }
 
 //    用handler接收子线程返回的信息并做处理
@@ -65,7 +57,7 @@ public class Regist_Activity extends Activity implements View.OnClickListener{
 
                     if (s.equals("0")) {
 //                        setDialog("该手机号码已经被使用，请使用其他号码注册"); //弹出对话框提示
-                        Toast.makeText(getApplicationContext(),"手机号码已经被使用，请使用其他号码注册",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"手机号码已经被使用，请使用其他号码注册",Toast.LENGTH_LONG).show();
                     }
                     else {
 //                        setDialog("您已成功注册"); //弹出对话框

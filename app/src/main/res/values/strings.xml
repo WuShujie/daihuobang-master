@@ -17,4 +17,7 @@
     <string name="kinds">货物种类</string>
     <string name="pay">支付方式</string>
     <string name="time">送达时间</string>
+    <string name="volume">剩余容积</string>
+    <string name="toleratetime">可容忍额外时间</string>
+    <string name="tolerateroute">可容忍额外路程</string>
 </resources>

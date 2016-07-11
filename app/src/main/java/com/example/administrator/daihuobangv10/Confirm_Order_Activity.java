@@ -2,7 +2,9 @@ package com.example.administrator.daihuobangv10;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,24 +20,11 @@ import java.util.HashMap;
  */
 public class Confirm_Order_Activity extends Activity {
 
-    private static final int DIALOG = 1;
     private ListView lv;
     private Button btn;
+    private Toolbar tb;
     static ArrayList<HashMap<String,Object>> listitem;
     SimpleAdapter adapter;
-
-//
-//    private Handler handler = new Handler(){
-//        @Override
-//        public void handleMessage(Message msg) {
-//            switch (msg.what) {
-//                case DIALOG:
-//
-//                    alert.cancel();
-//                    break;
-//            }
-//        }
-//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +34,20 @@ public class Confirm_Order_Activity extends Activity {
         listitem = new ArrayList<>();
 
         //获取页面上的控件
+        tb = (Toolbar) findViewById(R.id.toolbar_confirm_order);
         lv = (ListView) findViewById(R.id.lv_confirm_order);
         btn = (Button)findViewById(R.id.btn_confirm_order);
+
+        // 为标题栏设置添加title及左上的返回按钮
+        tb.setTitle("带货帮");
+        tb.setTitleTextColor(Color.parseColor("#ffffff"));
+        tb.setNavigationIcon(R.drawable.ic_return);
+        tb.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         //设置list view的adapter适配器
         adapter = new SimpleAdapter(this,getData(),R.layout.item_confirm_order,
@@ -82,27 +83,7 @@ public class Confirm_Order_Activity extends Activity {
                 adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(),"删除第"+(p+1)+"项货物",Toast.LENGTH_LONG).show();
                 return true;
-//
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        new AlertDialog.Builder(Confirm_Order_Activity.this).setTitle("Delete")
-//                                .setMessage("sure to delete this item?").setPositiveButton("yes", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                listitem.remove(p);
-//                                adapter.notifyDataSetChanged();
-//                                message = handler.obtainMessage(DIALOG);
-//                                handler.sendMessage(message);
-//                            }
-//                        }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                finish();
-//                            }
-//                        }).show();
-//                    }
-//                }).start();
+
             }
         });
     }

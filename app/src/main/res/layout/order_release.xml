@@ -96,7 +96,7 @@
                     android:id="@+id/btn_choosetime"
                     android:layout_width="65dp"
                     android:layout_height="wrap_content"
-                    android:text="选择"
+                    android:text="选择日期"
                     android:textColor="@color/colorPrimary"
                     android:background="@color/white"
                     android:textSize="15sp"
@@ -125,7 +125,7 @@
                     android:gravity="right"
                     android:layout_weight="1"
                     android:spinnerMode="dialog"
-                    android:prompt="@string/kinds"/>
+                    android:prompt="@string/volume"/>
             </LinearLayout>
 
             <LinearLayout
@@ -148,7 +148,7 @@
                     android:gravity="right"
                     android:layout_weight="1"
                     android:spinnerMode="dialog"
-                    android:prompt="@string/time"/>
+                    android:prompt="@string/toleratetime"/>
             </LinearLayout>
 
             <LinearLayout
@@ -171,7 +171,7 @@
                     android:gravity="right"
                     android:layout_weight="1"
                     android:spinnerMode="dropdown"
-                    android:prompt="@string/pay"/>
+                    android:prompt="@string/tolerateroute"/>
             </LinearLayout>
 
             <Button

@@ -14,17 +14,17 @@
         android:theme="@style/AppTheme" >
 
         <activity android:name=".Login_Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".SideSlip_Activity" >
         </activity>
 
         <activity android:name=".Regist_Activity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".OrderDetails_Activity">

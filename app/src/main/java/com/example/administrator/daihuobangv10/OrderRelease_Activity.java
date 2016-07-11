@@ -2,11 +2,14 @@ package com.example.administrator.daihuobangv10;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,10 +19,46 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.administrator.daihuobangv10.Dao.Host;
+import com.example.administrator.daihuobangv10.Dao.Order;
+import com.example.administrator.daihuobangv10.Dao.User;
+import com.example.administrator.daihuobangv10.util.HttpConnect;
+
 /**
  * Created by wsj on 16/7/1.
  */
-public class OrderRelease_Activity extends AppCompatActivity {
+public class OrderRelease_Activity extends AppCompatActivity implements View.OnClickListener{
+
+    private Toolbar tb;
+    private Spinner sp1,sp2,sp3;
+    private Button btn,btn2;
+    private EditText et_start,et_end,et_starttime;
+    public static String start,end,starttime,startPosLat,startPosLng,endPostLat,endPosLng,
+            vol,tolerateTime,tolerateRoute;
+
+    /**
+     * hangler机制接收子线程发送来的message，并进行处理
+     */
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 1:
+                    String s = msg.obj.toString();
+                    Log.i("tag",s);
+
+                    if (s.equals("-1")){    //返回错误结果码！
+                        Toast.makeText(getApplicationContext(),"unsuccessfully~QAQ",Toast.LENGTH_SHORT).show();
+                    }else {
+                        //返回正确结果的处理！
+                        Order.orderID = s;
+                        Toast.makeText(getApplication(),"successfully!The order id is"+s,Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +67,28 @@ public class OrderRelease_Activity extends AppCompatActivity {
 
 //        获取页面里各个控件
         final CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.layout_order_release);
-        Toolbar tb = (Toolbar) findViewById(R.id.toolbar_order_release);
-        Spinner sp1 = (Spinner) findViewById(R.id.spinner1);
-        Spinner sp2 = (Spinner) findViewById(R.id.spinner2);
-        Spinner sp3 = (Spinner) findViewById(R.id.spinner3);
-        Button btn = (Button) findViewById(R.id.btn_order_release);
-        Button btn2 = (Button) findViewById(R.id.btn_choosetime);
-        final EditText et = (EditText) findViewById(R.id.et_starttime);
+        tb = (Toolbar) findViewById(R.id.toolbar_order_release);
+        sp1 = (Spinner) findViewById(R.id.spinner1);
+        sp2 = (Spinner) findViewById(R.id.spinner2);
+        sp3 = (Spinner) findViewById(R.id.spinner3);
+        btn = (Button) findViewById(R.id.btn_order_release);
+        btn2 = (Button) findViewById(R.id.btn_choosetime);
+        et_starttime = (EditText) findViewById(R.id.et_starttime);
+        et_start = (EditText) findViewById(R.id.et_start_OrderRelease);
+        et_end = (EditText) findViewById(R.id.et_end_OrderRelease);
+
+//        获取上一页面传递的信息
+//        Bundle bundle = getIntent().getExtras();
+//        startPosLat = bundle.getString("startPosLat");
+//        startPostLng = bundle.getString("startPostLng");
+//        endPostLat = bundle.getString("endPostLat");
+//        endPosLng = bundle.getString("endPosLng");
+//        start = bundle.getString("startPosName");
+//        end = bundle.getString("endPosName");
+
+//        将上一页面的起点终点写入
+        et_start.setText(start);
+        et_end.setText(end);
 
 
 //        为标题栏设置添加title及左上的返回按钮
@@ -51,26 +105,27 @@ public class OrderRelease_Activity extends AppCompatActivity {
 
 
 //        从array中获取下拉列表内容
-        final String[] release = getResources().getStringArray(R.array.release);
+        String[] volume = getResources().getStringArray(R.array.volume);
         String[] distance = getResources().getStringArray(R.array.distance);
         String[] time_extra = getResources().getStringArray(R.array.time_extra);
 
 
 //        给每个下拉列表设置adapter以及列表项的选择进行监听且响应
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,release);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,volume);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp1.setAdapter(adapter1);
         sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                String[] release = getResources().getStringArray(R.array.release);
-                Snackbar.make(layout,release[position
+                String[] volume = getResources().getStringArray(R.array.volume);
+                Snackbar.make(layout,volume[position
                         ],Snackbar.LENGTH_SHORT).setAction("right",new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
                     }
                 }).show();
+                vol = ""+position;
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -90,6 +145,7 @@ public class OrderRelease_Activity extends AppCompatActivity {
                     public void onClick(View v) {
                     }
                 }).show();
+                tolerateRoute = ""+position;
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -110,6 +166,7 @@ public class OrderRelease_Activity extends AppCompatActivity {
                     public void onClick(View v) {
                     }
                 }).show();
+                tolerateTime = ""+position;
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -119,31 +176,56 @@ public class OrderRelease_Activity extends AppCompatActivity {
 
 
 //        发布运力按钮的点击监听响应事件
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"fabuyunli",Toast.LENGTH_SHORT).show();
-                release();
-            }
-        });
+        btn.setOnClickListener(this);
 
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        选择日期按钮的监听响应
+        btn2.setOnClickListener(this);
+   }
+
+
+//onclick接口，对页面中的按钮点击进行监听
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_choosetime:   //点击选择日期按钮
+                //弹出选择日期
                 DatePickerDialog date = new DatePickerDialog(OrderRelease_Activity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        String str = year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
-                        et.setText(str);
+                        starttime = year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+                        et_starttime.setText(starttime);
                     }
                 },2016,7,6);
                 date.show();
-            }
-        });
-   }
+                break;
+            case R.id.btn_order_release:    //点击发布按钮
+                //URL
+                final String url = "http://"+ Host.host+":3000/order/addRoute?"+"driverId="+ User.id
+                        +"&startPosLat="+startPosLat+"&startPosLng="+startPosLng+"&endPosLat="+endPostLat
+                        +"&endPosLng="+endPosLng+"&startPosName="+start+"&endPosName="+end+"&startTime="+
+                        starttime+"&volume="+vol+"&tolerateTime="+tolerateTime+"&tolerateRoute="+tolerateRoute;
+                Log.i("tag",url);
 
-    private void release(){
-        //发布运力
+//                新建线程进行网络访问，并接收到后台返回的数据发送到主线程
+                new Thread(){
+                    @Override
+                    public void run() {
+                        try{
+
+                            String response = HttpConnect.doget(url);   //网络访问
+
+                            //将后台返回的数据利用message发送给主线程的handler处理
+                            Message msg = Message.obtain();
+                            msg.what = 1;
+                            msg.obj = response;
+                            handler.sendMessage(msg);
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
+                break;
+        }
     }
-
 }

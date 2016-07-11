@@ -448,7 +448,7 @@
             <!--android:textColor="@color/white"-->
             <!--android:background="@color/colorPrimary"-->
             <!--android:textSize="24sp"-->
-            <!--android:text="确认接单"/>-->
+            <!--android:text="确认交货"/>-->
     </LinearLayout>
 
         </ScrollView>
