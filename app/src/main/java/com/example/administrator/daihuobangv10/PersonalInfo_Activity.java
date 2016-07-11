@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.daihuobangv10.Dao.Host;
 import com.example.administrator.daihuobangv10.Dao.User;
 import com.example.administrator.daihuobangv10.util.HttpConnect;
 
@@ -146,7 +147,7 @@ public class PersonalInfo_Activity extends AppCompatActivity{
         User.id = "16";
 
 //        拼接url
-        final String url = "http://120.27.48.82:3000/user/getUserInfo?"+"userId="+User.id;
+        final String url = "http://"+ Host.host+":3000/user/getUserInfo?"+"userId="+User.id;
         Log.i("tag",url);
 
 //        新建线程访问网络，并获取到吼他返回的信息

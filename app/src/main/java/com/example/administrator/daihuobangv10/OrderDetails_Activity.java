@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.administrator.daihuobangv10.Dao.Host;
+import com.example.administrator.daihuobangv10.Dao.Order;
 import com.example.administrator.daihuobangv10.Dao.User;
 import com.example.administrator.daihuobangv10.util.HttpConnect;
 
@@ -53,14 +55,14 @@ public class OrderDetails_Activity extends Activity implements View.OnClickListe
         et_receiver = (EditText) findViewById(R.id.et_receiver_OrderDetail);
         et_receiverphone = (EditText) findViewById(R.id.et_receiverphone_OrderDetail);
 
-        //获取上一页面intent中传来的数据,需要接入上一页面activity才能测试
-//        Bundle bundle = getIntent().getExtras();
-//        startPosLat = bundle.getString("startPosLat");
-//        startPostLng = bundle.getString("startPostLng");
-//        endPostLat = bundle.getString("endPostLat");
-//        endPosLng = bundle.getString("endPosLng");
-//        startPosName = bundle.getString("startPosName");
-//        endPosName = bundle.getString("endPosName");
+//        获取上一页面intent中传来的数据,需要接入上一页面activity才能测试
+        Bundle bundle = getIntent().getExtras();
+        startPosLat = bundle.getString("startPosLat");
+        startPostLng = bundle.getString("startPostLng");
+        endPostLat = bundle.getString("endPostLat");
+        endPosLng = bundle.getString("endPosLng");
+        startPosName = bundle.getString("startPosName");
+        endPosName = bundle.getString("endPosName");
 
         //将上一页面确定的起点终点写入
         et_start.setText(startPosName);
@@ -168,10 +170,14 @@ public class OrderDetails_Activity extends Activity implements View.OnClickListe
         });
     }
 
+    /**
+     * onclick 接口的响应事件
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_chooseday:
+            case R.id.btn_chooseday:    //选择日期按钮，弹出系统日历供用户选择日期，获取到日期信息后返回
                 DatePickerDialog date = new DatePickerDialog(OrderDetails_Activity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -181,7 +187,7 @@ public class OrderDetails_Activity extends Activity implements View.OnClickListe
                 },2016,6,8);
                 date.show();
                 break;
-            case R.id.btn_order:
+            case R.id.btn_order:    //确认订单按钮
                 if (day.isEmpty()){
                     Toast.makeText(getApplicationContext(),"choose day!",Toast.LENGTH_SHORT).show();
                 }else if (hour.isEmpty()){
@@ -190,13 +196,15 @@ public class OrderDetails_Activity extends Activity implements View.OnClickListe
                     arriveTime = day+","+hour;
                 }
 
-                final String url = "http://120.27.48.82:3000/order/addOrder?"+"userId="+ User.id+"&startPosLat="+startPosLat+
+//                拼接URL
+                final String url = "http://"+ Host.host+":3000/order/addOrder?"+"userId="+ User.id+"&startPosLat="+startPosLat+
                         "&startPosLng="+startPostLng+"&endPosLat="+endPostLat+"&endPosLng="+endPosLng+"&goodsType="+goodsType+
                         "&goodsAmount="+goodsAmount+"&arriveTime="+arriveTime+"&reciver="+reciver+"&reciverPhoneNum="+reciverPhoneNum+
                         "&startPosName="+startPosName+"&endPosName="+endPosName;
 //                Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
                 Log.i("tag",url);
 
+//                新建线程进行网络访问，并且将后台返回的数据利用message发送到主线程进行处理
                 new Thread(){
                     @Override
                     public void run() {
@@ -215,11 +223,13 @@ public class OrderDetails_Activity extends Activity implements View.OnClickListe
                         }
                     }
                 }.start();
-
                 break;
         }
     }
 
+    /**
+     * 新建handler机制对子线程发送来的message接收并处理
+     */
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -228,10 +238,12 @@ public class OrderDetails_Activity extends Activity implements View.OnClickListe
                     String s = msg.obj.toString();//获取发送来的消息内容
                     Log.i("tag",s);
 
-                    if (s.equals("-1")){
+                    if (s.equals("-1")){    //返回错误结果码！
                         Toast.makeText(getApplicationContext(),"unsuccessfully~QAQ",Toast.LENGTH_SHORT).show();
                     }else {
-
+                        //返回正确结果的处理！
+                        Order.orderID = s;
+                        Toast.makeText(getApplication(),"successfully!The order id is"+s,Toast.LENGTH_SHORT).show();
                     }
                     break;
             }

@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.administrator.daihuobangv10.Dao.Host;
 import com.example.administrator.daihuobangv10.Dao.User;
 import com.example.administrator.daihuobangv10.util.HttpConnect;
 
@@ -134,7 +135,7 @@ public class Login_Activity extends Activity implements View.OnClickListener{
                 editor.commit();
 
                 //拼接URL
-                final String url = "http://120.27.48.82:3000/user/logIn?"+"phoneNumber="+phone+"&userPassword="+pwd;
+                final String url = "http://"+ Host.host+":3000/user/logIn?"+"phoneNumber="+phone+"&userPassword="+pwd;
 
                 Log.i("tag",url);
 
