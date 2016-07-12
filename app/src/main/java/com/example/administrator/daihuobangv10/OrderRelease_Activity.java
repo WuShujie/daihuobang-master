@@ -20,7 +20,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.administrator.daihuobangv10.Dao.Host;
-import com.example.administrator.daihuobangv10.Dao.Order;
 import com.example.administrator.daihuobangv10.Dao.User;
 import com.example.administrator.daihuobangv10.util.HttpConnect;
 
@@ -51,7 +50,6 @@ public class OrderRelease_Activity extends AppCompatActivity implements View.OnC
                         Toast.makeText(getApplicationContext(),"unsuccessfully~QAQ",Toast.LENGTH_SHORT).show();
                     }else {
                         //返回正确结果的处理！
-                        Order.orderID = s;
                         Toast.makeText(getApplication(),"successfully!The order id is"+s,Toast.LENGTH_SHORT).show();
                     }
                     break;

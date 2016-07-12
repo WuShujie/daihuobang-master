@@ -144,7 +144,6 @@ public class PersonalInfo_Activity extends AppCompatActivity{
 //        User.username = "diro";
 //        User.phoneNum = "123456";
 //        User.idcardNum = "12345";
-        User.id = "16";
 
 //        拼接url
         final String url = "http://"+ Host.host+":3000/user/getUserInfo?"+"userId="+User.id;

@@ -19,9 +19,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.administrator.daihuobangv10.Dao.Host;
-import com.example.administrator.daihuobangv10.Dao.Order;
 import com.example.administrator.daihuobangv10.Dao.User;
 import com.example.administrator.daihuobangv10.util.HttpConnect;
+
+import java.net.URLEncoder;
 
 /**
  * Created by wsj on 16/6/27.
@@ -30,10 +31,10 @@ import com.example.administrator.daihuobangv10.util.HttpConnect;
 public class OrderDetails_Activity extends Activity implements View.OnClickListener{
     private Button btn,btn2;
     private Spinner sp1,sp2,sp3;
-    private EditText et_start,et_end, et_number,et_volume,et_receiver,et_receiverphone;
+    private EditText et_start,et_end, et_number,et_volume,et_receiver,et_receiverphone,et_value;
 
     private static String startPosLat,startPostLng,endPostLat,endPosLng,
-            arriveTime,reciver,reciverPhoneNum,startPosName,endPosName,goodsType,goodsAmount,goodsVolume;
+            arriveTime,reciver,reciverPhoneNum,startPosName,endPosName,goodsType,goodsAmount,goodsVolume,goodsValue;
     static String day,hour;
 
     @Override
@@ -54,6 +55,7 @@ public class OrderDetails_Activity extends Activity implements View.OnClickListe
         et_volume = (EditText) findViewById(R.id.et_volume_OrderDetail);
         et_receiver = (EditText) findViewById(R.id.et_receiver_OrderDetail);
         et_receiverphone = (EditText) findViewById(R.id.et_receiverphone_OrderDetail);
+        et_value = (EditText) findViewById(R.id.et_value_OrderDetail);
 
 //        获取上一页面intent中传来的数据,需要接入上一页面activity才能测试
         Bundle bundle = getIntent().getExtras();
@@ -73,6 +75,7 @@ public class OrderDetails_Activity extends Activity implements View.OnClickListe
         goodsVolume = et_volume.getText().toString();
         reciver = et_receiver.getText().toString();
         reciverPhoneNum = et_receiverphone.getText().toString();
+        goodsValue = et_value.getText().toString();
 
         //从array数组中读取到各个下拉列表项具体内容
         String[] kinds = getResources().getStringArray(R.array.kinds);
@@ -196,20 +199,20 @@ public class OrderDetails_Activity extends Activity implements View.OnClickListe
                     arriveTime = day+","+hour;
                 }
 
-//                拼接URL
-                final String url = "http://"+ Host.host+":3000/order/addOrder?"+"userId="+ User.id+"&startPosLat="+startPosLat+
-                        "&startPosLng="+startPostLng+"&endPosLat="+endPostLat+"&endPosLng="+endPosLng+"&goodsType="+goodsType+
-                        "&goodsAmount="+goodsAmount+"&arriveTime="+arriveTime+"&reciver="+reciver+"&reciverPhoneNum="+reciverPhoneNum+
-                        "&startPosName="+startPosName+"&endPosName="+endPosName;
-//                Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
-                Log.i("tag",url);
 
 //                新建线程进行网络访问，并且将后台返回的数据利用message发送到主线程进行处理
                 new Thread(){
                     @Override
                     public void run() {
                         try {
-
+//                拼接URL
+                            final String url = "http://"+ Host.host+":3000/order/addOrder?"+"userId="+ User.id+"&startPosLat="+startPosLat+
+                                    "&startPosLng="+startPostLng+"&endPosLat="+endPostLat+"&endPosLng="+endPosLng+"&goodsType="+goodsType+
+                                    "&goodsAmount="+goodsAmount+"&arriveTime="+arriveTime+"&reciver="+reciver+"&reciverPhoneNum="+reciverPhoneNum+
+                                    "&startPosName="+ URLEncoder.encode(startPosName,"utf-8")+"&endPosName="+URLEncoder.encode(endPosName,"utf-8")
+                                    +"&goodsValue="+goodsValue;
+//                Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
+                            Log.i("tag",url);
                             String response = HttpConnect.doget(url);   //网络访问
 
                             //将后台返回的数据利用message发送给主线程的handler处理
@@ -242,7 +245,6 @@ public class OrderDetails_Activity extends Activity implements View.OnClickListe
                         Toast.makeText(getApplicationContext(),"unsuccessfully~QAQ",Toast.LENGTH_SHORT).show();
                     }else {
                         //返回正确结果的处理！
-                        Order.orderID = s;
                         Toast.makeText(getApplication(),"successfully!The order id is"+s,Toast.LENGTH_SHORT).show();
                     }
                     break;

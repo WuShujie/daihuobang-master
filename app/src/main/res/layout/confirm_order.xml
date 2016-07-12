@@ -35,7 +35,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="长按可以删除不想携带的货物"
+                            android:text="点击查看货物详情，长按删除不想携带的货物"
                             android:layout_marginLeft="10dp"
                             android:textSize="12sp"
                             android:textColor="@color/colorPrimary"/>
